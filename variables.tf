@@ -1,7 +1,8 @@
 variable "pet_filename" {
   description = "File path where the pet file will be created"
   type        = string
-  default     = "/root/pets.txt"
+  default     = "/var/tmp/pets.txt"
+"
 }
 
 variable "pet_content" {
