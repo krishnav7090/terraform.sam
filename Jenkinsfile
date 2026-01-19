@@ -10,15 +10,15 @@ pipeline {
         stage('Checkout from SCM') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/mujahed1716/terraform.git'
+                    url: 'https://github.com/krishnav7090/terraform.sam.git'
             }
         }
 
         stage('Terraform Init') {
             steps {
                 sh '''
-                terraform --version
-                terraform init
+                Terraform --version
+                Terraform init
                 '''
             }
         }
@@ -26,7 +26,7 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 sh '''
-                terraform plan -out=tfplan
+                Terraform plan -out=tfplan
                 '''
             }
         }
@@ -35,7 +35,7 @@ pipeline {
             steps {
                 input message: 'Approve Terraform Apply?', ok: 'Apply'
                 sh '''
-                terraform apply -auto-approve tfplan
+                Terraform apply -auto-approve tfplan
                 '''
             }
         }
