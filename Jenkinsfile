@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        terraform 'Terraform'
+    }
+
     environment {
         TF_IN_AUTOMATION = "true"
     }
@@ -17,8 +21,8 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 sh '''
-                Terraform --version
-                Terraform init
+                terraform --version
+                terraform init
                 '''
             }
         }
@@ -26,7 +30,7 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 sh '''
-                Terraform plan -out=tfplan
+                terraform plan -out=tfplan
                 '''
             }
         }
@@ -35,7 +39,7 @@ pipeline {
             steps {
                 input message: 'Approve Terraform Apply?', ok: 'Apply'
                 sh '''
-                Terraform apply -auto-approve tfplan
+                terraform apply -auto-approve tfplan
                 '''
             }
         }
